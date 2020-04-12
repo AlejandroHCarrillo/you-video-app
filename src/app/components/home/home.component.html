@@ -1,0 +1,49 @@
+<div class="container main-container">
+  <h1>My video channel youtube</h1>
+  <hr>
+
+<!-- 
+  My APIkey:      AIzaSyCHhZwE-GIfZI7USQSNrl1DkWl_GhbUWBY
+  Canal Fernando: UCuaPTYj15JSkETGnEseaFFg
+  lista uploads:  UUaaPTYj15JSkETGnEseaFFg
+
+  Umbrella Academy List:  
+-->
+<!-- [infiniteScrollDistance]="2" 
+[infiniteScrollThrottle]="50"
+-->
+
+  <div class="card-columns" infiniteScroll  (scrolled)="onScroll()">
+    <div class="card animated fadeIn fast" *ngFor="let video of videos" >
+      <img [src]="video.thumbnails.high.url" class="card-img-top img-fluid" [alt]="video.title">
+      <div class="card-body">
+        <h5 class="card-title">{{video.title}}</h5>
+        <button class="btn btn-outline-primary btn-block"
+                (click)="verVideo(video)">Ver video</button>
+        <!-- <p class="card-text">{{video.description}}</p> -->
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-outline-primary btn-block"
+      (click)="cargarMasVideos()"
+  >Cargar mas videos...</button>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" *ngIf="videoSel">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{videoSel?.title}}</h5>
+      </div>
+      <div class="modal-body">
+        <iframe width="100%" height="315" [src]="videoSel.resourceId.videoId | video " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" >Close</button>
+      </div>
+    </div>
+  </div>
+
+</div>
